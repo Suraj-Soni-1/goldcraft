@@ -1,0 +1,59 @@
+name: Build iOS IPA (GoldCraft)
+
+on:
+  push:
+    branches: [ main, master ]
+  pull_request:
+    branches: [ main, master ]
+  workflow_dispatch:
+
+jobs:
+  build-ios:
+    name: Build iOS App (.ipa)
+    runs-on: macos-14
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: 'npm'
+
+      - name: Install Dependencies
+        run: npm install --legacy-peer-deps
+
+      - name: Build Web App
+        run: npm run build:mobile
+
+      - name: Sync with Capacitor iOS
+        run: npx cap sync ios
+
+      - name: Build iOS App with Xcode
+        run: |
+          cd ios/App
+          xcodebuild clean build \
+            -project App.xcodeproj \
+            -scheme App \
+            -configuration Release \
+            -destination 'generic/platform=iOS' \
+            -derivedDataPath ./build \
+            CODE_SIGN_IDENTITY="" \
+            CODE_SIGNING_REQUIRED=NO \
+            CODE_SIGNING_ALLOWED=NO
+
+      - name: Package Unsigned .ipa
+        run: |
+          mkdir -p build/Payload
+          cp -r ios/App/build/Build/Products/Release-iphoneos/App.app build/Payload/GoldCraft.app
+          cd build
+          zip -r GoldCraft.ipa Payload
+
+      - name: Upload .ipa Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: GoldCraft-iOS-IPA
+          path: build/GoldCraft.ipa
+          retention-days: 14

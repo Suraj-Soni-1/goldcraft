@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "317628461401",
+    "project_id": "goldcraft-store",
+    "storage_bucket": "goldcraft-store.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:317628461401:android:bf958805b327ac1fde1c48",
+        "android_client_info": {
+          "package_name": "com.goldcraft.billing"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "317628461401-7gnr96nupjh966ci45abis8ngc6ec37h.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB6NY0W5KSQ8WsOIC_nJkkb4MQ0D7Uft-Q"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "317628461401-7gnr96nupjh966ci45abis8ngc6ec37h.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

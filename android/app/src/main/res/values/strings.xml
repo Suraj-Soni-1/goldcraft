@@ -1,0 +1,8 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">GoldCraft</string>
+    <string name="title_activity_main">GoldCraft</string>
+    <string name="package_name">com.goldcraft.billing</string>
+    <string name="custom_url_scheme">com.goldcraft.billing</string>
+    <string name="server_client_id">317628461401-7gnr96nupjh966ci45abis8ngc6ec37h.apps.googleusercontent.com</string>
+</resources>

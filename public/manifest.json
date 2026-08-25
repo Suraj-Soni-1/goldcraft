@@ -1,0 +1,16 @@
+{
+  "short_name": "GoldCraft",
+  "name": "GoldCraft — Goldsmith Billing & Workstation",
+  "icons": [
+    {
+      "src": "/logo.png",
+      "type": "image/png",
+      "sizes": "192x192 512x512"
+    }
+  ],
+  "start_url": "/",
+  "background_color": "#0a0814",
+  "theme_color": "#fdb022",
+  "display": "standalone",
+  "orientation": "portrait-primary"
+}

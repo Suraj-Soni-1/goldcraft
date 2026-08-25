@@ -25,10 +25,10 @@ jobs:
       - name: Install Dependencies
         run: npm install --legacy-peer-deps
 
-      - name: Build Web App
+      - name: Build Web Assets
         run: npm run build:mobile
 
-      - name: Sync with Capacitor iOS
+      - name: Sync Capacitor iOS
         run: npx cap sync ios
 
       - name: Build iOS App with Xcode
@@ -37,17 +37,22 @@ jobs:
           xcodebuild clean build \
             -project App.xcodeproj \
             -scheme App \
-            -configuration Release \
+            -configuration Debug \
             -destination 'generic/platform=iOS' \
             -derivedDataPath ./build \
+            -skipPackagePluginValidation \
             CODE_SIGN_IDENTITY="" \
             CODE_SIGNING_REQUIRED=NO \
-            CODE_SIGNING_ALLOWED=NO
+            CODE_SIGNING_ALLOWED=NO \
+            CODE_SIGN_STYLE=Manual \
+            VALIDATE_PRODUCT=NO
 
-      - name: Package Unsigned .ipa
+      - name: Package .ipa
         run: |
           mkdir -p build/Payload
-          cp -r ios/App/build/Build/Products/Release-iphoneos/App.app build/Payload/GoldCraft.app
+          APP_PATH=$(find ios/App/build/Build/Products -name "App.app" -type d | head -n 1)
+          echo "Found App bundle at: $APP_PATH"
+          cp -r "$APP_PATH" build/Payload/GoldCraft.app
           cd build
           zip -r GoldCraft.ipa Payload
 
